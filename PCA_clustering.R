@@ -56,13 +56,15 @@ get_pca2 <- function(data){
 }
 
 #Задача для Чака Норриса.
-d <- dist(swiss)
-fit <- hclust(d)
-swiss$cluster <- factor(cutree(fit, k =  2))
-
-d <- dist(swiss)
-fit <- hclust(d)
-swiss$cluster <- factor(cutree(fit, k =  2))
+test_data <- read.csv("https://stepic.org/media/attachments/course/524/Norris_2.csv")
+is_multicol <- function(test_data) {corr <- cor(test_data)
+diag(corr) <- 0
+out <- row.names(which(abs(corr) == 1, arr.ind=TRUE))
+if (length(out) == 0) {
+  print("There is no collinearity in the data")
+} else {print(out)
+  }
+}
 # дополните код, чтобы получить график
 library(ggplot2)
 my_plot <- ggplot(swiss, aes(Education, Catholic, col = cluster))+
